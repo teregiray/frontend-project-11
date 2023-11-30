@@ -1,6 +1,6 @@
 lint:
 		npx prettier --write .
-		npx eslint .
+		npx eslint . --fix
 webpack:
 		npx webpack serve
 build:
