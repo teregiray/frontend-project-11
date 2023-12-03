@@ -1,6 +1,16 @@
 import './styles.scss';
 import 'bootstrap';
 import * as yup from 'yup';
+import i18n from 'i18next';
+import resources from './locales/index.js';
+
+const i18nextInstance = i18n.createInstance();
+
+await i18nextInstance.init({
+  lng: 'ru',
+  debug: true,
+  resources,
+});
 
 const state = {
   link: null,
@@ -9,6 +19,7 @@ const state = {
     duplicate: null,
   },
   feeds: [],
+  lng: 'ru',
 };
 
 const form = document.querySelector("form"); // eslint-disable-line
@@ -20,19 +31,20 @@ const render = () => {
   urlInput.focus();
 
   if (state.valid.duplicate) {
+    urlInput.classList.add('is-invalid');
     feedback.classList.remove('text-success');
     feedback.classList.add('text-danger');
-    feedback.textContent = 'RSS уже существует';
+    feedback.textContent = i18nextInstance.t('rssAlredyExists');
   } else if (state.valid.rules) {
     urlInput.classList.remove('is-invalid');
     feedback.classList.remove('text-danger');
     feedback.classList.add('text-success');
-    feedback.textContent = 'RSS успешно загружен';
+    feedback.textContent = i18nextInstance.t('rssAdded');
   } else {
     urlInput.classList.add('is-invalid');
     feedback.classList.remove('text-success');
     feedback.classList.add('text-danger');
-    feedback.textContent = 'Ссылка должна быть валидным URL';
+    feedback.textContent = i18nextInstance.t('notValidRss');
   }
 };
 
