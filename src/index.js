@@ -3,6 +3,7 @@ import 'bootstrap';
 import * as yup from 'yup';
 import i18n from 'i18next';
 import resources from './locales/index.js';
+// import fetchFunc from './fetch.js';
 
 const i18nextInstance = i18n.createInstance();
 
@@ -25,6 +26,8 @@ const state = {
 const form = document.querySelector("form"); // eslint-disable-line
 const urlInput = form.querySelector("#url-input"); // eslint-disable-line
 const feedback = document.querySelector(".feedback"); // eslint-disable-line
+const sectionText = document.querySelector('.container-xxl') // eslint-disable-line
+sectionText.textContent = '';
 
 const isValid = (translateKey) => {
   urlInput.classList.remove('is-invalid');
@@ -75,6 +78,7 @@ form.addEventListener('submit', async (e) => {
     await schema.validate(state);
     state.valid.rules = true;
     state.feeds.push(inputLink);
+
   } catch (err) {
     // console.log(`error: ${err.errors}`);
     state.valid.rules = false;

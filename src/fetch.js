@@ -1,18 +1,22 @@
-async function fetchFunc(link) {
-  // link = 'https://ru.hexlet.io/lessons.rss';
-  try {
-    const response = await fetch(link);
+import axios from 'axios';
 
-    if (!response.ok) {
+async function fetchHTML(link) {
+  try {
+    const response = await axios.get(link);
+
+    // Проверка успешности запроса
+    if (response.status !== 200) {
       console.error(`Error: ${response.status} - ${response.statusText}`);
       return;
     }
 
-    const text = await response.text();
-    console.log(text);
+    const html = response.data;
+    console.log(html);
   } catch (error) {
-    console.error(`Fetch error: ${error.message}`);
+    console.error(`Axios error: ${error.message}`);
   }
 }
 
-fetchFunc('https://ru.hexlet.io/lessons.rss');
+export default fetchHTML;
+
+fetchHTML('https://ru.hexlet.io/lessons.rss');
