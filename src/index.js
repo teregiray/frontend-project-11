@@ -26,7 +26,7 @@ const state = {
 const form = document.querySelector("form"); // eslint-disable-line
 const urlInput = form.querySelector("#url-input"); // eslint-disable-line
 const feedback = document.querySelector(".feedback"); // eslint-disable-line
-const sectionText = document.querySelector('.container-xxl') // eslint-disable-line
+const sectionText = document.querySelector(".container-xxl"); // eslint-disable-line
 sectionText.textContent = '';
 
 const isValid = (translateKey) => {
@@ -78,7 +78,6 @@ form.addEventListener('submit', async (e) => {
     await schema.validate(state);
     state.valid.rules = true;
     state.feeds.push(inputLink);
-
   } catch (err) {
     // console.log(`error: ${err.errors}`);
     state.valid.rules = false;

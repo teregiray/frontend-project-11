@@ -1,9 +1,10 @@
-// Generated using webpack-cli https://github.com/webpack/webpack-cli
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const __filename = new URL(import.meta.url).pathname;
+const __dirname = path.dirname(__filename);
 
-module.exports = {
+export default {
   mode: process.env.NODE_ENV || 'development',
   entry: './src/index.js',
   output: {
@@ -15,7 +16,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'index.html',
+      template: path.resolve(__dirname, 'index.html'), // Используйте полный путь к файлу
     }),
   ],
   module: {
