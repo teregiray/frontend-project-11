@@ -26,25 +26,30 @@ const form = document.querySelector("form"); // eslint-disable-line
 const urlInput = form.querySelector("#url-input"); // eslint-disable-line
 const feedback = document.querySelector(".feedback"); // eslint-disable-line
 
+const isValid = (translateKey) => {
+  urlInput.classList.remove('is-invalid');
+  feedback.classList.remove('text-danger');
+  feedback.classList.add('text-success');
+  feedback.textContent = i18nextInstance.t(translateKey);
+};
+
+const inValid = (translateKey) => {
+  urlInput.classList.add('is-invalid');
+  feedback.classList.remove('text-success');
+  feedback.classList.add('text-danger');
+  feedback.textContent = i18nextInstance.t(translateKey);
+};
+
 const render = () => {
   urlInput.value = '';
   urlInput.focus();
 
   if (state.valid.duplicate) {
-    urlInput.classList.add('is-invalid');
-    feedback.classList.remove('text-success');
-    feedback.classList.add('text-danger');
-    feedback.textContent = i18nextInstance.t('rssAlredyExists');
+    inValid('rssAlreadyExists');
   } else if (state.valid.rules) {
-    urlInput.classList.remove('is-invalid');
-    feedback.classList.remove('text-danger');
-    feedback.classList.add('text-success');
-    feedback.textContent = i18nextInstance.t('rssAdded');
+    isValid('rssAdded');
   } else {
-    urlInput.classList.add('is-invalid');
-    feedback.classList.remove('text-success');
-    feedback.classList.add('text-danger');
-    feedback.textContent = i18nextInstance.t('notValidRss');
+    inValid('notValidRss');
   }
 };
 
